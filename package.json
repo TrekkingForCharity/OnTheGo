@@ -34,5 +34,8 @@
     "tslint": "5.12.1",
     "typemoq": "2.1.0",
     "typescript": "3.2.2"
+  },
+  "dependencies": {
+    "bulma": "^0.7.2"
   }
 }
