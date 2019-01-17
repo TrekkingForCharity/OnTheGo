@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "noImplicitAny": false,
+      "noEmitOnError": true,
+      "removeComments": false,
+      "sourceMap": true,
+      "target": "es5",
+      "lib": ["es6", "webworker", "dom"],
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "allowSyntheticDefaultImports": true
+    },
+    "exclude": [
+      "node_modules",
+      "dist"
+    ]
+  }

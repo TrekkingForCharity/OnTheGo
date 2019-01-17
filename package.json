@@ -1,0 +1,38 @@
+{
+  "name": "trekkingforcharity.org",
+  "version": "1.0.0",
+  "description": "The primary site for the Trekking for Charity platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --require ts-node/register -r jsdom-global/register test/**/*.ts",
+    "lint:release": "sass-lint src/**/*.scss -v -q --max-warnings 0",
+    "lint:dev": "sass-lint src/**/*.scss -v -q",
+    "lint:ts": "tslint -c tslint.json 'src/**/*.ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrekkingForCharity/trekkingforcharity.org.git"
+  },
+  "author": "Trekking for Charity",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/TrekkingForCharity/trekkingforcharity.org/issues"
+  },
+  "homepage": "https://github.com/TrekkingForCharity/trekkingforcharity.org#readme",
+  "devDependencies": {
+    "@types/chai": "4.1.7",
+    "@types/chai-as-promised": "7.1.0",
+    "@types/mocha": "5.2.5",
+    "chai": "4.2.0",
+    "chai-as-promised": "7.1.1",
+    "mocha": "5.2.0",
+    "parcel-bundler": "1.11.0",
+    "pug": "2.0.3",
+    "sass": "1.16.0",
+    "sass-lint": "1.12.1",
+    "ts-node": "7.0.1",
+    "tslint": "5.12.1",
+    "typemoq": "2.1.0",
+    "typescript": "3.2.2"
+  }
+}
