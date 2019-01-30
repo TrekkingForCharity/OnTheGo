@@ -15,16 +15,13 @@ steps:
     versionSpec: '10.15.1'
   displayName: 'Install Node.js'
 
-- script: |
-    npm install
+- script: npm install
   displayName: 'install'
 
-- script: |
-    npm run test:release
+- script: npm run test:release
   displayName: 'tests'
 
-- script: |
-    npm run build
+- script: npm run build
   displayName: 'build for release'
 
 - task: PublishBuildArtifacts@1
