@@ -15,7 +15,7 @@ steps:
     versionSpec: '10.15.1'
   displayName: 'Install Node.js'
 
-- script: npm install
+- script: npm install -dd
   displayName: 'install'
 
 - script: npm run test:release
