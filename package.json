@@ -4,7 +4,7 @@
   "description": "The primary site for the Trekking for Charity platform",
   "main": "index.js",
   "scripts": {
-    "build": "parcel ./src/pages/layout.pug --out-file index.html",
+    "build": "parcel build ./src/pages/layout.pug --out-file index.html",
     "start": "parcel ./src/pages/layout.pug --out-file index.html",
     "test": "mocha -r ts-node/register -r jsdom-global/register test/**/*.ts",
     "test:coverage": "nyc -r lcov -e .ts -x \"*.spec.ts\" mocha -r ts-node/register -r jsdom-global/register test/**/*.spec.ts && nyc report",
@@ -30,6 +30,7 @@
     "chai": "4.2.0",
     "codacy-coverage": "^3.4.0",
     "fontello-cli": "^0.4.0",
+    "parcel-plugin-compress": "1.0.6",
     "jsdom": "^13.1.0",
     "jsdom-global": "^3.0.2",
     "mocha": "5.2.0",
