@@ -1,10 +1,10 @@
 import { Container } from 'inversify';
 import { browserRouter, ProuterBrowserRouter } from 'prouter';
+import { INFRASTRUCTURE_TYPES, PAGE_TYPES, SERVICE_TYPES } from '../constructs';
 import { ErrorPage } from '../pages';
 import { AuthenticationService, IAuthenticationService, IPageProcessingService,
     PageProcessingService } from '../services';
 import { IRouter, Router } from './';
-import { INFRASTRUCTURE_TYPES, PAGE_TYPES, SERVICE_TYPES } from '../constructs'
 
 export class AppStart {
     public static setup(): void {

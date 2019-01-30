@@ -1,8 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { ProuterBrowserRouter, ProuterRequest } from 'prouter';
-import { INavigationRejection } from '../constructs';
+import { INavigationRejection, INFRASTRUCTURE_TYPES, SERVICE_TYPES } from '../constructs';
 import { IPageProcessingService } from '../services';
-import { INFRASTRUCTURE_TYPES, SERVICE_TYPES } from '../constructs/types'
 
 export interface IRouter {
     attemptToNavigate(path: string);
