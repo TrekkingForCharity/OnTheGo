@@ -1,9 +1,8 @@
-import { Container, inject } from 'inversify';
+import { Container, inject, injectable } from 'inversify';
 import { ProuterRequest, ProuterResponse } from 'prouter';
-import { INavigationRejection, NavigationRejectionReason } from '../constructs/navigation-rejection';
-import { IPage } from '../constructs/page';
-import { IRouterRequest } from '../infrastucture/router';
-import { IAuthenticationService } from './authentication-service';
+import { INavigationRejection, IPage, NavigationRejectionReason } from '../constructs';
+import { IRouterRequest } from '../infrastucture';
+import { IAuthenticationService } from './';
 
 export interface IPageProcessingService {
     loadPage(pageName: string, req: ProuterRequest, resp: ProuterResponse): Promise<IPage>;
@@ -14,12 +13,13 @@ interface IPageData {
     navigationRejection?: INavigationRejection;
 }
 
+@injectable()
 export class PageProcessingService implements IPageProcessingService {
     private currentPage: IPage;
 
     constructor(
-        @inject('Container') private container: Container,
-        private authenticationService: IAuthenticationService) {
+        @inject('container') private container: Container,
+        @inject('authentication-service') private authenticationService: IAuthenticationService) {
     }
 
     public async loadPage(pageName: string, req: IRouterRequest, resp: ProuterResponse): Promise<IPage> {

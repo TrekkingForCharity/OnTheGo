@@ -1,4 +1,3 @@
-import { ProuterStringMap } from 'prouter';
 import { IRouterRequest } from '../infrastucture/router';
 
 export interface IPage {

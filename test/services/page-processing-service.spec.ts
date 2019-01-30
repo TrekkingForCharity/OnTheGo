@@ -1,13 +1,12 @@
 import { expect } from 'chai';
 import { Container } from 'inversify';
-import { ProuterRequest, ProuterResponse, ProuterStringMap } from 'prouter';
+import { ProuterResponse, ProuterStringMap } from 'prouter';
 import 'reflect-metadata';
 import * as TypeMoq from 'typemoq';
 import { NavigationRejectionReason } from '../../src/scripts/constructs/navigation-rejection';
 import { IPage } from '../../src/scripts/constructs/page';
-import { IRouterRequest } from '../../src/scripts/infrastucture/router';
-import { IAuthenticationService } from '../../src/scripts/services/authentication-service';
-import { PageProcessingService } from '../../src/scripts/services/page-processing-service';
+import { IRouterRequest } from '../../src/scripts/infrastucture';
+import { IAuthenticationService, PageProcessingService } from '../../src/scripts/services';
 
 class Helper {
     public static generateRequest(): IRouterRequest  {

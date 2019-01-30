@@ -1,7 +1,8 @@
+import { inject, injectable } from 'inversify';
 import { ProuterBrowserRouter, ProuterRequest } from 'prouter';
-import { INavigationRejection } from '../constructs/navigation-rejection';
-import { IAuthenticationService } from '../services/authentication-service';
-import { IPageProcessingService } from '../services/page-processing-service';
+import { INavigationRejection } from '../constructs';
+import { IPageProcessingService, TYPES as ServiceTypes } from '../services';
+import { TYPES as InfrastructureTypes } from './';
 
 export interface IRouter {
     attemptToNavigate(path: string);
@@ -13,11 +14,11 @@ export interface IRouterRequest extends ProuterRequest {
     navigationRejection?: INavigationRejection;
 }
 
+@injectable()
 export class Router implements IRouter {
     constructor(
-        private pageProcessingService: IPageProcessingService,
-        private prouterBrowserRouter: ProuterBrowserRouter,
-        private authenticationService: IAuthenticationService) {
+        @inject(ServiceTypes.PageProcessingService) private pageProcessingService: IPageProcessingService,
+        @inject(InfrastructureTypes.ProuterBrowserRouter) private prouterBrowserRouter: ProuterBrowserRouter) {
     }
 
     public attemptToNavigate(path: string) {
