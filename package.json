@@ -12,7 +12,7 @@
     "lint:dev": "sass-lint src/**/*.scss -v -q",
     "lint:ts": "tslint -c tslint.json 'src/**/*.ts'",
     "font:install": "fontello-cli install --config ./fontello.config.json --css ./src/fonts/fontello/css --font ./src/fonts/fontello/font",
-    "test:release": "nyc -r lcov -e .ts -x \"*.spec.ts\" mocha -r ts-node/register -r jsdom-global/register test/**/*.spec.ts && nyc report | codacy-coverage && rm -rf ./coverage"
+    "test:release": "nyc -r lcov -e .ts -x \"*.spec.ts\" mocha -r ts-node/register -r jsdom-global/register test/**/*.spec.ts && nyc report && cat coverage/lcov.info | codacy-coverage"
   },
   "repository": {
     "type": "git",
