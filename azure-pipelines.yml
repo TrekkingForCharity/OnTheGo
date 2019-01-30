@@ -20,6 +20,8 @@ steps:
 
 - script: npm run test:release
   displayName: 'tests'
+  env:
+    CODACY_PROJECT_TOKEN: $(CODACY_PROJECT_TOKEN)
 
 - script: npm run build
   displayName: 'build for release'
