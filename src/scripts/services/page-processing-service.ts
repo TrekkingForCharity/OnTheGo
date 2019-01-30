@@ -1,7 +1,7 @@
 import { Container, inject, injectable } from 'inversify';
 import { ProuterRequest, ProuterResponse } from 'prouter';
 import { INavigationRejection, IPage, NavigationRejectionReason } from '../constructs';
-import { IRouterRequest } from '../infrastucture';
+import { IRouterRequest } from '../infrastructure';
 import { IAuthenticationService } from './';
 
 export interface IPageProcessingService {

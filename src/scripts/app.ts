@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { AppStart } from './infrastucture/app-start';
+import { AppStart } from './infrastructure/app-start';
 
 export class App {
     constructor() {

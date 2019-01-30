@@ -1,4 +1,4 @@
-import { IRouterRequest } from '../infrastucture/router';
+import { IRouterRequest } from '../infrastructure';
 
 export interface IPage {
     readonly requiresAuthentication: boolean;

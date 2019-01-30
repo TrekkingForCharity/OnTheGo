@@ -5,7 +5,7 @@ import 'reflect-metadata';
 import * as TypeMoq from 'typemoq';
 import { NavigationRejectionReason } from '../../src/scripts/constructs/navigation-rejection';
 import { IPage } from '../../src/scripts/constructs/page';
-import { IRouterRequest } from '../../src/scripts/infrastucture';
+import { IRouterRequest } from '../../src/scripts/infrastructure';
 import { IAuthenticationService, PageProcessingService } from '../../src/scripts/services';
 
 class Helper {

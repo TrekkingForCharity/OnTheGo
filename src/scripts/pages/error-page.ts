@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
 import { IPage } from '../constructs';
-import { IRouterRequest } from '../infrastucture';
+import { IRouterRequest } from '../infrastructure';
 
 @injectable()
 export class ErrorPage implements IPage {

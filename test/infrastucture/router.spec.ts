@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { ProuterBrowserRouter } from 'prouter';
 import * as TypeMoq from 'typemoq';
-import { Router } from '../../src/scripts/infrastucture';
+import { Router } from '../../src/scripts/infrastructure';
 import { IPageProcessingService } from '../../src/scripts/services';
 
 describe('Router', () => {
