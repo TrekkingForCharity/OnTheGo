@@ -1,9 +1,10 @@
 import { Container } from 'inversify';
 import { browserRouter, ProuterBrowserRouter } from 'prouter';
-import { ErrorPage, TYPES as PageTypes } from '../pages';
+import { ErrorPage } from '../pages';
 import { AuthenticationService, IAuthenticationService, IPageProcessingService,
-    PageProcessingService, TYPES as ServiceTypes } from '../services';
-import { IRouter, Router, TYPES as InfrastructureTypes } from './';
+    PageProcessingService } from '../services';
+import { IRouter, Router } from './';
+import { INFRASTRUCTURE_TYPES, PAGE_TYPES, SERVICE_TYPES } from '../constructs'
 
 export class AppStart {
     public static setup(): void {
@@ -14,11 +15,11 @@ export class AppStart {
     }
 
     private static setupPages(container: Container): void {
-        container.bind<ErrorPage>(PageTypes.ErrorPage).to(ErrorPage);
+        container.bind<ErrorPage>(PAGE_TYPES.ErrorPage).to(ErrorPage);
     }
 
     private static setupRoutes(container: Container): void {
-        const router: IRouter = container.get<IRouter>(InfrastructureTypes.Router);
+        const router: IRouter = container.get<IRouter>(INFRASTRUCTURE_TYPES.Router);
         router.registerRoute('error-page', '');
 
         router.start();
@@ -27,15 +28,15 @@ export class AppStart {
     private static setupContainer(): Container {
         const container = new Container();
 
-        container.bind<IPageProcessingService>(ServiceTypes.PageProcessingService).to(PageProcessingService);
-        container.bind<IAuthenticationService>(ServiceTypes.PageProcessingService).to(AuthenticationService);
-        container.bind<IRouter>(InfrastructureTypes.Router).to(Router);
+        container.bind<IPageProcessingService>(SERVICE_TYPES.PageProcessingService).to(PageProcessingService);
+        container.bind<IAuthenticationService>(SERVICE_TYPES.PageProcessingService).to(AuthenticationService);
+        container.bind<IRouter>(INFRASTRUCTURE_TYPES.Router).to(Router);
 
         const prouterBrowserRouter = browserRouter();
-        container.bind<ProuterBrowserRouter>(InfrastructureTypes.ProuterBrowserRouter)
+        container.bind<ProuterBrowserRouter>(INFRASTRUCTURE_TYPES.ProuterBrowserRouter)
             .toConstantValue(prouterBrowserRouter);
 
-        container.bind<Container>(InfrastructureTypes.Container).toConstantValue(container);
+        container.bind<Container>(INFRASTRUCTURE_TYPES.Container).toConstantValue(container);
 
         return container;
     }
