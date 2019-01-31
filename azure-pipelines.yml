@@ -24,6 +24,9 @@ steps:
     configMode: manual
     cliProjectKey: 't4c_org'
     cliProjectVersion: '$(Build.BuildNumber)'
+    extraProperties: |
+     sonar.sources=src
+     sonar.inclusions=test/**
 
 - script: |
     npm install
