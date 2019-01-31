@@ -27,6 +27,7 @@ steps:
     extraProperties: |
      sonar.sources=src
      sonar.tests=test
+     sonar.typescript.lcov.reportPaths=coverage/lcov.info
 
 - script: |
     npm install
@@ -36,14 +37,14 @@ steps:
 - script: npm run build
   displayName: 'build for release'
 
-- script: npm run test:coverage:release
+- script: npm run test:coverage
   displayName: 'tests'
   
 - task: PublishTestResults@2
   displayName: 'Publish Test Results coverage/xunit-report.xml'
   inputs:
-    testResultsFormat: XUnit
-    testResultsFiles: 'coverage/xunit-report.xml'
+    testResultsFormat: JUnit
+    testResultsFiles: 'coverage/junit-report.xml'
 
 - task: PublishCodeCoverageResults@1
   displayName: 'Publish code coverage from coverage/cobertura-coverage.xml'
