@@ -15,18 +15,45 @@ steps:
     versionSpec: '10.15.1'
   displayName: 'Install Node.js'
 
+- task: SonarSource.sonarcloud.14d9cde6-c1da-4d55-aa01-2965cd301255.SonarCloudPrepare@1
+  displayName: 'Prepare analysis on SonarCloud'
+  inputs:
+    SonarCloud: Sonarcloud
+    organization: 'trekking-for-charity'
+    scannerMode: CLI
+    configMode: manual
+    cliProjectKey: 't4c_org'
+    cliProjectVersion: '$(Build.BuildNumber)'
+
 - script: |
     npm install
-    npm run font:install
+    npm run font:install    
   displayName: 'install'
 
 - script: npm run build
   displayName: 'build for release'
 
-- script: npm run test:release
+- script: npm run test:coverage:release
   displayName: 'tests'
-  env:
-    CODACY_PROJECT_TOKEN: $(CODACY_PROJECT_TOKEN)
+  
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results coverage/xunit-report.xml'
+  inputs:
+    testResultsFormat: XUnit
+    testResultsFiles: 'coverage/xunit-report.xml'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage from coverage/cobertura-coverage.xml'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: 'coverage/cobertura-coverage.xml'
+
+- task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
+  displayName: 'Run Code Analysis'
+
+- task: SonarSource.sonarcloud.38b27399-a642-40af-bb7d-9971f69712e8.SonarCloudPublish@1
+  displayName: 'Publish Quality Gate Result'
+
 
 - task: PublishBuildArtifacts@1
   inputs:
