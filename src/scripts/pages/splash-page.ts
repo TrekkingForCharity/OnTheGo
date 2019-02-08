@@ -4,12 +4,15 @@ import { IRouter } from '../infrastructure';
 import { IPageContentService } from '../services';
 import { BasePage } from './base-page';
 
-@injectable()
-export class ErrorPage extends BasePage implements IPage {
-    public readonly requiresAuthentication: boolean = false;
 
-    protected viewName: string = 'error.partial';
-    protected bodyClasses: string[];
+@injectable()
+export class SplashPage extends BasePage implements IPage {
+    public requiresAuthentication: boolean = false;
+
+    protected viewName: string = 'splash.partial';
+    protected bodyClasses: string[] = [
+        'splash',
+    ];
 
     constructor(
         @inject(SERVICE_TYPES.PageContentService) pageContentService: IPageContentService,
@@ -21,8 +24,8 @@ export class ErrorPage extends BasePage implements IPage {
     public canNavigateTo(): Promise<void> {
         return Promise.resolve();
     }
-
     public canNavigateFrom(): Promise<void> {
         return Promise.resolve();
     }
+
 }
