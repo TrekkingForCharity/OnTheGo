@@ -1,6 +1,7 @@
 import { Container, inject, injectable } from 'inversify';
 import { ProuterRequest, ProuterResponse } from 'prouter';
-import { INavigationRejection, IPage, NavigationRejectionReason } from '../constructs';
+import { INavigationRejection, INFRASTRUCTURE_TYPES, IPage,
+    NavigationRejectionReason, PAGE_TYPES, SERVICE_TYPES } from '../constructs';
 import { IRouterRequest } from '../infrastructure';
 import { IAuthenticationService } from './';
 
@@ -18,8 +19,8 @@ export class PageProcessingService implements IPageProcessingService {
     private currentPage: IPage;
 
     constructor(
-        @inject('container') private container: Container,
-        @inject('authentication-service') private authenticationService: IAuthenticationService) {
+        @inject(INFRASTRUCTURE_TYPES.Container) private container: Container,
+        @inject(SERVICE_TYPES.AuthenticationService) private authenticationService: IAuthenticationService) {
     }
 
     public async loadPage(pageName: string, req: IRouterRequest, resp: ProuterResponse): Promise<IPage> {
@@ -65,9 +66,8 @@ export class PageProcessingService implements IPageProcessingService {
         if (pageData.navigationRejection) {
             return Promise.resolve(pageData);
         }
-        const page = this.container.get(pageName) as IPage;
+        const page = this.container.get<IPage>(pageName);
         if (!page) {
-            // GET ERROR PAGE
             return this.processError({
                 navigationRejectionReason: NavigationRejectionReason.notFound,
             });
@@ -101,7 +101,7 @@ export class PageProcessingService implements IPageProcessingService {
     }
 
     private processError(navigationRejection: INavigationRejection): Promise<IPageData> {
-        const page = this.container.get('error-page') as IPage;
+        const page = this.container.get<IPage>(PAGE_TYPES.ErrorPage);
         if (!page) {
             return Promise.reject();
         }

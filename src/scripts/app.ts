@@ -15,3 +15,5 @@ export class App {
         AppStart.setup();
     }
 }
+
+const app: App = new App();

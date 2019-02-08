@@ -6,9 +6,11 @@ export const INFRASTRUCTURE_TYPES = {
 
 export const SERVICE_TYPES = {
     AuthenticationService: Symbol('authentication-service'),
+    PageContentService: Symbol('page-content-service'),
     PageProcessingService: Symbol('page-processing-service'),
 };
 
 export const PAGE_TYPES = {
-    ErrorPage: Symbol('error-page'),
+    ErrorPage: 'error-page',
+    SplashPage: 'splash-page',
 };
