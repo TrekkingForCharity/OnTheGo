@@ -1,10 +1,9 @@
 import { expect } from 'chai';
 import 'reflect-metadata';
 import * as TypeMoq from 'typemoq';
-import { BasePage } from '../../src/scripts/pages/base-page';
-import { IPage } from '../../src/scripts/constructs';
-import { IPageContentService } from '../../src/scripts/services';
-import { IRouter, IRouterRequest } from '../../src/scripts/infrastructure';
+import { IRouter, IRouterRequest } from '../infrastructure';
+import { IPageContentService } from '../services';
+import { BasePage } from './base-page';
 
 class TestPage extends BasePage {
     public requiresAuthentication: boolean = false;

@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import * as fetchMock from 'fetch-mock';
 import 'reflect-metadata';
-import { NavigationRejectionReason } from '../../src/scripts/constructs';
-import { IPageContentService, PageContentService } from '../../src/scripts/services';
+import { NavigationRejectionReason } from '../constructs';
+import { IPageContentService, PageContentService } from './';
 
 const domParserName: string = 'DOMParser';
 describe('Page Content Service', () => {

@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import 'reflect-metadata';
 import * as TypeMoq from 'typemoq';
-import { IRouter } from '../../src/scripts/infrastructure';
-import { IAuthenticationService } from '../../src/scripts/services';
-import { HeaderComponent } from '../../src/scripts/components';
+import { IRouter } from '../infrastructure';
+import { IAuthenticationService } from '../services';
+import { HeaderComponent } from './';
 
 interface IHeaderItem {
     attachTo: HTMLElement;

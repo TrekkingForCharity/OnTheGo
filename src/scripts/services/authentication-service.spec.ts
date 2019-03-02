@@ -1,10 +1,10 @@
 import { expect } from 'chai';
+import { EventBus } from 'eventbus-ts';
+import { SigninResponse, User, UserManager } from 'oidc-client';
 import 'reflect-metadata';
 import * as TypeMoq from 'typemoq';
-import { UserManager, User, SigninResponse } from 'oidc-client';
-import { IStorageProvider } from '../../src/scripts/infrastructure';
-import { EventBus } from 'eventbus-ts';
-import { AuthenticationService } from '../../src/scripts/services';
+import { IStorageProvider } from '../infrastructure';
+import { AuthenticationService } from './';
 
 describe('Authentication Service', () => {
     it('when signing in, url is stored and user manager is called', async () => {
@@ -55,7 +55,7 @@ describe('Authentication Service', () => {
         expect(true).to.be.equal(userManagerCallback);
     });
     it('when call back is fired, event is fired and uri is returned', async () => {
-        const signinResponse: TypeMoq.IMock<SigninResponse> = TypeMoq.Mock.ofType<SigninResponse>()
+        const signinResponse: TypeMoq.IMock<SigninResponse> = TypeMoq.Mock.ofType<SigninResponse>();
         const user: User = new User(signinResponse.object);
         const userManager: TypeMoq.IMock<UserManager> = TypeMoq.Mock.ofType<UserManager>();
         userManager.setup((x: any) => x.then).returns(() => undefined);
@@ -77,7 +77,7 @@ describe('Authentication Service', () => {
         expect(true).to.be.equal(eventBusCallback);
     });
     it('when user is authenticated, promise is resolved and user is returned', async () => {
-        const signinResponse: TypeMoq.IMock<SigninResponse> = TypeMoq.Mock.ofType<SigninResponse>()
+        const signinResponse: TypeMoq.IMock<SigninResponse> = TypeMoq.Mock.ofType<SigninResponse>();
         const user: User = new User(signinResponse.object);
         const userManager: TypeMoq.IMock<UserManager> = TypeMoq.Mock.ofType<UserManager>();
         userManager.setup((x: any) => x.then).returns(() => undefined);
@@ -109,6 +109,6 @@ describe('Authentication Service', () => {
 
         await authenticationService.isAuthenticated().catch((err: any) => {
             expect(undefined).to.be.equal(err);
-        });        
+        });
     });
 });

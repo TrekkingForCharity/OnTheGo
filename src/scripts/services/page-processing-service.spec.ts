@@ -3,10 +3,10 @@ import { Container } from 'inversify';
 import { ProuterResponse, ProuterStringMap } from 'prouter';
 import 'reflect-metadata';
 import * as TypeMoq from 'typemoq';
-import { NavigationRejectionReason } from '../../src/scripts/constructs/navigation-rejection';
-import { IPage } from '../../src/scripts/constructs/page';
-import { IRouterRequest } from '../../src/scripts/infrastructure';
-import { IAuthenticationService, PageProcessingService } from '../../src/scripts/services';
+import { NavigationRejectionReason } from '../constructs/navigation-rejection';
+import { IPage } from '../constructs/page';
+import { IRouterRequest } from '../infrastructure';
+import { IAuthenticationService, PageProcessingService } from './';
 
 class Helper {
     public static generateRequest(): IRouterRequest  {

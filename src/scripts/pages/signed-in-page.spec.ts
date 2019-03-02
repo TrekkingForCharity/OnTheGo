@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import 'reflect-metadata';
 import * as TypeMoq from 'typemoq';
-import { IAuthenticationService } from '../../src/scripts/services';
-import { SignedInPage } from '../../src/scripts/pages';
-import { INavigationRejection, NavigationRejectionReason } from '../../src/scripts/constructs';
-import { IStorageProvider, IRouterRequest, IRouter } from '../../src/scripts/infrastructure';
+import { NavigationRejectionReason } from '../constructs';
+import { IRouter, IRouterRequest, IStorageProvider } from '../infrastructure';
+import { IAuthenticationService } from '../services';
+import { SignedInPage } from './';
 
 describe('Signed In Page', () => {
     it('when sign in already attempted promise should be rejected', async () => {

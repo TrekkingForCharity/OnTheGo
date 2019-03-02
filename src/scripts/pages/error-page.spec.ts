@@ -1,9 +1,9 @@
 import { expect } from 'chai';
-import * as TypeMoq from 'typemoq';
 import 'reflect-metadata';
-import { ErrorPage } from "../../src/scripts/pages";
-import { IPageContentService } from '../../src/scripts/services';
-import { IRouter } from '../../src/scripts/infrastructure';
+import * as TypeMoq from 'typemoq';
+import { IRouter } from '../infrastructure';
+import { IPageContentService } from '../services';
+import { ErrorPage } from './';
 
 describe('Error Page', () => {
     it('page does not require authentication', () => {

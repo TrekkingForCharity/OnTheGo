@@ -2,9 +2,9 @@ import { expect } from 'chai';
 import { Container } from 'inversify';
 import 'reflect-metadata';
 import * as TypeMoq from 'typemoq';
-import { HeaderComponent } from '../../src/scripts/components';
-import { IRouter } from '../../src/scripts/infrastructure';
-import { ComponentService, IAuthenticationService } from '../../src/scripts/services';
+import { HeaderComponent } from '../components';
+import { IRouter } from '../infrastructure';
+import { ComponentService, IAuthenticationService } from './';
 
 describe('Component Service', () => {
     const router: TypeMoq.IMock<IRouter> = TypeMoq.Mock.ofType<IRouter>();
