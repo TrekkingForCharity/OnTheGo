@@ -6,7 +6,7 @@ html.has-navbar-fixed-top
         title Trekking for Charity
         link(rel="stylesheet", href="../styles/app.sass")
     body
-        nav.navbar.is-fixed-top(role="navigation", aria-label="main navigation")
+        nav#main-nav.navbar.is-fixed-top(role="navigation", aria-label="main navigation")
             div.navbar-brand
                 a.navbar-item(href="#")
                     img(src="../images/logo-small.png", height="28")
@@ -18,10 +18,10 @@ html.has-navbar-fixed-top
                 
             div#navbarTop.navbar-menu
                 div.navbar-end
-                    a#nav-home.navbar-item(href="#") Home
-                    a#nav-sign-out.navbar-item(href="#") Sign Out
-                    a#nav-sign-in.navbar-item(href="#") Sign In
-                    a#nav-sign-up.navbar-item(href="#") Sign Up
+                    a#nav-home.navbar-item(href="/" data-navigation) Home
+                    a#nav-sign-out.navbar-item(href="/sign-out") Sign Out
+                    a#nav-sign-in.navbar-item(href="/sign-in") Sign In
+                    a#nav-sign-up.navbar-item(href="/sign-up" data-navigation) Sign Up
 
         main.container
             .content 

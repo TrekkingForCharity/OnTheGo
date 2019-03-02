@@ -7,7 +7,8 @@
     "rules": {
         "quotemark": {
             "options": "single"
-        }
+        },
+        "prefer-for-of": false 
     },
     "rulesDirectory": []
 }

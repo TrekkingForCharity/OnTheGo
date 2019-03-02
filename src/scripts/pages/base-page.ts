@@ -34,10 +34,12 @@ export abstract class BasePage {
 
     protected processLinks(): Promise<void> {
         const self = this;
-        const navigationLinks = this.pageContent.querySelectorAll<HTMLAnchorElement>('a[data-navigation]');
-        for( let linkCounter = 0; linkCounter < navigationLinks.length; linkCounter++) {
-            navigationLinks[linkCounter].removeEventListener('click', (ev: MouseEvent) => { self.linkClick(ev); });
-            navigationLinks[linkCounter].addEventListener('click', (ev: MouseEvent) => { self.linkClick(ev); });
+        const $navigationLinks = this.pageContent.querySelectorAll<HTMLAnchorElement>('a[data-navigation]');
+        if ($navigationLinks.length > 0) {
+            for (let navigationLinkCount = 0; navigationLinkCount < $navigationLinks.length; navigationLinkCount++) {
+                $navigationLinks[navigationLinkCount]
+                    .addEventListener('click', (ev: MouseEvent) => { self.linkClick(ev); });
+            }
         }
         return Promise.resolve();
     }

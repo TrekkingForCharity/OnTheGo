@@ -4,7 +4,6 @@ import { IRouter } from '../infrastructure';
 import { IPageContentService } from '../services';
 import { BasePage } from './base-page';
 
-
 @injectable()
 export class SplashPage extends BasePage implements IPage {
     public requiresAuthentication: boolean = false;

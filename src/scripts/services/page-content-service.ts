@@ -18,7 +18,7 @@ export class PageContentService implements IPageContentService {
         return fetch(`/${viewName}.html`, {
             method: 'get',
         })
-        .then(this.processResponse)        
+        .then(this.processResponse)
         .then((content: string) => {
             return this.generateAndStoreElement(content, viewName);
         })
@@ -32,9 +32,10 @@ export class PageContentService implements IPageContentService {
     }
 
     private generateAndStoreElement(content: string, viewName: string): Promise<HTMLElement> {
-        const container = document.createElement('template');
-        container.innerHTML = content;
-        this.pageContentItem[viewName] = container.content.firstChild.cloneNode(true) as HTMLElement;
-        return Promise.resolve(container.content.firstChild as HTMLElement);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(content, 'text/xml');
+        const element = doc.firstChild;
+        this.pageContentItem[viewName] = element.cloneNode(true) as HTMLElement;
+        return Promise.resolve(element as HTMLElement);
     }
 }

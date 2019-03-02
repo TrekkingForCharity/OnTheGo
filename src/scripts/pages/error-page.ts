@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
-import { INFRASTRUCTURE_TYPES, IPage, SERVICE_TYPES } from '../constructs';
-import { IRouter } from '../infrastructure';
+import { INFRASTRUCTURE_TYPES, IPage, NavigationRejectionReason, SERVICE_TYPES } from '../constructs';
+import { IRouter, IRouterRequest } from '../infrastructure';
 import { IPageContentService } from '../services';
 import { BasePage } from './base-page';
 
@@ -23,6 +23,14 @@ export class ErrorPage extends BasePage implements IPage {
     }
 
     public canNavigateFrom(): Promise<void> {
+        return Promise.resolve();
+    }
+
+    protected loadAndProcessPageData(req: IRouterRequest): Promise<void> {
+        if (req.navigationRejection &&
+            req.navigationRejection.navigationRejectionReason === NavigationRejectionReason.loginBack) {
+            sessionStorage.removeItem('sign-in-attempted');
+        }
         return Promise.resolve();
     }
 }

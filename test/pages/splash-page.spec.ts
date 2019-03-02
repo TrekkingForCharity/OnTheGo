@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import * as TypeMoq from 'typemoq';
+import 'reflect-metadata';
 import { SplashPage } from "../../src/scripts/pages";
 import { IPageContentService } from '../../src/scripts/services';
 import { IRouter } from '../../src/scripts/infrastructure';
