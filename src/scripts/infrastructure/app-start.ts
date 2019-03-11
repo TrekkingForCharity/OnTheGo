@@ -1,15 +1,18 @@
 import { EventBus } from 'eventbus-ts';
+import Handlerbars from 'handlebars';
 import { Container } from 'inversify';
 import { UserManager, UserManagerSettings } from 'oidc-client';
 import { browserRouter, ProuterBrowserRouter } from 'prouter';
 import { App } from '../app';
 import { HeaderComponent } from '../components';
 import { COMPONENT_TYPES, INFRASTRUCTURE_TYPES, PAGE_TYPES, SERVICE_TYPES } from '../constructs';
-import { ErrorPage, SignedInPage, SplashPage } from '../pages';
+import { ErrorPage, HomePage, SignedInPage, SplashPage } from '../pages';
 import { AuthenticationService, ComponentService, IAuthenticationService, IComponentService, IPageContentService,
     IPageProcessingService, PageContentService, PageProcessingService } from '../services';
 import { IRouter, IStorageProvider, Router } from './';
 import { SessionStorageProvider } from './storage-provider';
+import { ITemplateService, TemplateService } from '../services/template-service';
+import { TrekItemComponent } from '../components/trek-item-component';
 
 export class AppStart {
     public static setup(): Promise<App> {
@@ -27,16 +30,19 @@ export class AppStart {
         container.bind<ErrorPage>(PAGE_TYPES.ErrorPage).to(ErrorPage);
         container.bind<SplashPage>(PAGE_TYPES.SplashPage).to(SplashPage);
         container.bind<SignedInPage>(PAGE_TYPES.SignedInPage).to(SignedInPage);
+        container.bind<HomePage>(PAGE_TYPES.HomePage).to(HomePage);
     }
 
     private static setupComponents(container: Container): void {
         container.bind<HeaderComponent>(COMPONENT_TYPES.HeaderComponent).to(HeaderComponent);
+        container.bind<TrekItemComponent>(COMPONENT_TYPES.TrekItemComponent).to(TrekItemComponent);
     }
 
     private static setupRoutes(container: Container): void {
         const router: IRouter = container.get<IRouter>(INFRASTRUCTURE_TYPES.Router);
         router.registerRoute(PAGE_TYPES.SplashPage, '/');
         router.registerRoute(PAGE_TYPES.SignedInPage, '/signed-in');
+        router.registerRoute(PAGE_TYPES.HomePage, '/home');
 
         router.registerRoute(PAGE_TYPES.ErrorPage, '*');
     }
@@ -48,6 +54,7 @@ export class AppStart {
         container.bind<IAuthenticationService>(SERVICE_TYPES.AuthenticationService).to(AuthenticationService);
         container.bind<IPageContentService>(SERVICE_TYPES.PageContentService).to(PageContentService);
         container.bind<IComponentService>(SERVICE_TYPES.ComponentService).to(ComponentService);
+        container.bind<ITemplateService>(SERVICE_TYPES.TemplateService).to(TemplateService);
         container.bind<IRouter>(INFRASTRUCTURE_TYPES.Router).to(Router);
 
         const prouterBrowserRouter = browserRouter();
@@ -70,6 +77,8 @@ export class AppStart {
         .toConstantValue(userManager);
 
         container.bind<EventBus>(INFRASTRUCTURE_TYPES.EventBus).toConstantValue(EventBus.getDefault());
+
+        container.bind<any>(INFRASTRUCTURE_TYPES.Handlebars).toFunction(Handlerbars.compile);
 
         container.bind<Container>(INFRASTRUCTURE_TYPES.Container).toConstantValue(container);
 

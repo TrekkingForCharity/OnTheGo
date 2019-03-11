@@ -21,7 +21,7 @@ export class AuthenticationService implements IAuthenticationService {
     ) {
     }
 
-    public signIn(originalUrl: string = '/'): Promise<any> {
+    public signIn(originalUrl: string = '/home'): Promise<any> {
         this.sessionStorageProvider.setItem('pre-login-url', originalUrl);
         return this.userManager.signinRedirect({state: 'some data'});
     }

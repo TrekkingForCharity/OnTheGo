@@ -1,0 +1,51 @@
+.outer
+    .columns
+        .column.is-4
+            aside.menu
+                p.menu-label Treks
+                    ul.menu-list
+                        li
+                            a#new-trek New Trek
+                p.menu-label Profile
+                    ul.menu-list
+                        li
+                            a Change Password   
+        #my-treks.column.is-8                                
+
+    form#create-trek
+        .field
+            label.label.is-inline-block(for="name") The name of the trek
+            span.help.is-pulled-right(data-valmsg-for="name")
+            p.control
+                input.input(name="name", type="text" placeholder="Name")
+        .field
+            p.control
+                button.button.is-primary Submit
+
+    script#trek-item(type="text/template")
+        article.media
+            figure.media-left
+                p.image.is-64x64
+                    img(src="{{bannerImage}}")
+            .media-content
+                .content
+                    p
+                        strong {{title}}
+                        span {{description}}
+                p.buttons.is-right
+                    a.button.is-small(href="{{viewUrl}}",  data-navigation)
+                        span.icon.is-small
+                            i.icon-book-open
+                        |&nbsp;View
+                    a.button.is-small(href="{{editDetailsUrl}}",  data-navigation)
+                        span.icon.is-small
+                            i.icon-pencil
+                        |&nbsp;Edit Details
+                    a.button.is-small(href="{{editLocationsUrl}}",  data-navigation)
+                        span.icon.is-small
+                            i.icon-location
+                        |&nbsp;Edit Start and Finish
+                    a.button.is-danger.is-small
+                        span.icon.is-small
+                            i.icon-trash-empty
+                        |&nbsp;Delete
