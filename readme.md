@@ -1,5 +1,11 @@
 # Trekking for Charity
 
+[![Build status](https://dev.azure.com/trekking-for-charity/trekkingforcharity.org/_apis/build/status/TrekkingForCharity.trekkingforcharity.org)](https://dev.azure.com/trekking-for-charity/trekkingforcharity.org/_build/latest?definitionId=3)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=t4c_org&metric=coverage)](https://sonarcloud.io/dashboard?id=t4c_org)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=t4c_org&metric=alert_status)](https://sonarcloud.io/dashboard?id=t4c_org)
+[![Known Vulnerabilities](https://snyk.io/test/github/TrekkingForCharity/trekkingforcharity.org/badge.svg)](https://snyk.io/test/github/TrekkingForCharity/trekkingforcharity.org)
+
+
 Trekking for Charity is an open platform aiming to help people organize and run sponsored events like walks and bike rides.  In this repository is the code for the website.
 
 ## Information
