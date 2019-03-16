@@ -33,10 +33,11 @@ steps:
      sonar.exclusions=src/**/*.spec.ts
      sonar.typescript.lcov.reportPaths=coverage/lcov.info
 
-- script: |
-    npm install
-    npm run font:install    
+- script: npm install    
   displayName: 'install'
+
+- script: npm run font:install
+  displayName: 'install font'
 
 - script: npm run build
   displayName: 'build for release'
