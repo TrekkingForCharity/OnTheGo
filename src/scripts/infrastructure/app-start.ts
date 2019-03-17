@@ -2,13 +2,15 @@ import { EventBus } from 'eventbus-ts';
 import { Container } from 'inversify';
 import { UserManager, UserManagerSettings } from 'oidc-client';
 import { browserRouter, ProuterBrowserRouter } from 'prouter';
+import * as validate from 'validate.js';
 import { App } from '../app';
 import { HeaderComponent } from '../components';
 import { COMPONENT_TYPES, INFRASTRUCTURE_TYPES, PAGE_TYPES, SERVICE_TYPES } from '../constructs';
 import { ErrorPage, SignedInPage, SplashPage } from '../pages';
-import { AuthenticationService, ComponentService, IAuthenticationService, IComponentService, IPageContentService,
+import { AuthenticationService, ComponentService, HelperService,
+    IAuthenticationService, IComponentService, IHelperService, IPageContentService,
     IPageProcessingService, PageContentService, PageProcessingService } from '../services';
-import { IRouter, IStorageProvider, Router } from './';
+import { IRouter, IStorageProvider, Router, Validate } from './';
 import { SessionStorageProvider } from './storage-provider';
 
 export class AppStart {
@@ -48,7 +50,9 @@ export class AppStart {
         container.bind<IAuthenticationService>(SERVICE_TYPES.AuthenticationService).to(AuthenticationService);
         container.bind<IPageContentService>(SERVICE_TYPES.PageContentService).to(PageContentService);
         container.bind<IComponentService>(SERVICE_TYPES.ComponentService).to(ComponentService);
+        container.bind<IHelperService>(SERVICE_TYPES.HelperService).to(HelperService);
         container.bind<IRouter>(INFRASTRUCTURE_TYPES.Router).to(Router);
+        container.bind<Validate>(INFRASTRUCTURE_TYPES.Validator).toConstantValue(validate);
 
         const prouterBrowserRouter = browserRouter();
         container.bind<ProuterBrowserRouter>(INFRASTRUCTURE_TYPES.ProuterBrowserRouter)
