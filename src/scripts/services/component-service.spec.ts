@@ -29,7 +29,7 @@ describe('Component Service', () => {
         container.setup((x) => x.get(TypeMoq.It.isAny())).returns(() => null);
         const componentService: ComponentService = new ComponentService(container.object);
         try {
-            await await componentService.loadComponentAndAttach(sym, element.object);
+            await componentService.loadComponentAndAttach(sym, element.object);
         } catch (err) {
             expect(err).to.equal(undefined);
         }

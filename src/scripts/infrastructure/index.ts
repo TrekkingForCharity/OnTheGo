@@ -1,3 +1,4 @@
+import { Validate } from './interfaces';
 import { IRouter, IRouterRequest, Router } from './router';
 import { IStorageProvider, SessionStorageProvider } from './storage-provider';
 
@@ -7,4 +8,5 @@ export {
     IStorageProvider,
     Router,
     SessionStorageProvider,
+    Validate,
 };
