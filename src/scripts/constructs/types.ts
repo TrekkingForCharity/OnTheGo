@@ -6,11 +6,13 @@ export const INFRASTRUCTURE_TYPES = {
     Router: Symbol('router'),
     SessionStorageProvider: Symbol('session-storage-provider'),
     UserManager: Symbol('user-manager'),
+    Validator: Symbol('validator'),
 };
 
 export const SERVICE_TYPES = {
     AuthenticationService: Symbol('authentication-service'),
     ComponentService: Symbol('component-service'),
+    HelperService: Symbol('helper-service'),
     PageContentService: Symbol('page-content-service'),
     PageProcessingService: Symbol('page-processing-service'),
     TemplateService: Symbol('template-service'),

@@ -1,10 +1,9 @@
 import { inject, injectable } from 'inversify';
-import { INFRASTRUCTURE_TYPES, IPage, SERVICE_TYPES, COMPONENT_TYPES } from '../constructs';
+import { COMPONENT_TYPES, INFRASTRUCTURE_TYPES, IPage, SERVICE_TYPES } from '../constructs';
 import { PullOut } from '../helpers/pull-out';
 import { IRouter, IRouterRequest } from '../infrastructure';
-import { IPageContentService, IComponentService } from '../services';
+import { IComponentService, IPageContentService, ITemplateService  } from '../services';
 import { BasePage } from './base-page';
-import { ITemplateService } from '../services/template-service';
 
 @injectable()
 export class HomePage extends BasePage implements IPage {
