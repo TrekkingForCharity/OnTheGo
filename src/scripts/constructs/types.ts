@@ -17,6 +17,7 @@ export const SERVICE_TYPES = {
 };
 
 export const PAGE_TYPES = {
+    ContactPage: 'contact-page',
     ErrorPage: 'error-page',
     SignedInPage: 'signed-in-page',
     SplashPage: 'splash-page',

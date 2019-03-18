@@ -6,7 +6,7 @@ import * as validate from 'validate.js';
 import { App } from '../app';
 import { HeaderComponent } from '../components';
 import { COMPONENT_TYPES, INFRASTRUCTURE_TYPES, PAGE_TYPES, SERVICE_TYPES } from '../constructs';
-import { ErrorPage, SignedInPage, SplashPage } from '../pages';
+import { ContactPage, ErrorPage, SignedInPage, SplashPage } from '../pages';
 import { AuthenticationService, ComponentService, HelperService,
     IAuthenticationService, IComponentService, IHelperService, IPageContentService,
     IPageProcessingService, PageContentService, PageProcessingService } from '../services';
@@ -29,6 +29,7 @@ export class AppStart {
         container.bind<ErrorPage>(PAGE_TYPES.ErrorPage).to(ErrorPage);
         container.bind<SplashPage>(PAGE_TYPES.SplashPage).to(SplashPage);
         container.bind<SignedInPage>(PAGE_TYPES.SignedInPage).to(SignedInPage);
+        container.bind<ContactPage>(PAGE_TYPES.ContactPage).to(ContactPage);
     }
 
     private static setupComponents(container: Container): void {
@@ -39,6 +40,7 @@ export class AppStart {
         const router: IRouter = container.get<IRouter>(INFRASTRUCTURE_TYPES.Router);
         router.registerRoute(PAGE_TYPES.SplashPage, '/');
         router.registerRoute(PAGE_TYPES.SignedInPage, '/signed-in');
+        router.registerRoute(PAGE_TYPES.ContactPage, '/contact');
 
         router.registerRoute(PAGE_TYPES.ErrorPage, '*');
     }
