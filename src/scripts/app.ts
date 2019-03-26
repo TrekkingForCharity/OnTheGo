@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import 'reflect-metadata';
 import { HeaderComponent } from './components';
-import { COMPONENT_TYPES, INFRASTRUCTURE_TYPES, SERVICE_TYPES } from './constructs';
+import { COMPONENT_TYPES, IComponent, INFRASTRUCTURE_TYPES, SERVICE_TYPES } from './constructs';
 import { IRouter } from './infrastructure';
 import { AppStart } from './infrastructure/app-start';
 import { IComponentService } from './services/component-service';
@@ -30,9 +30,19 @@ export class App {
     public start() {
         const self = this;
         const headerElement: HTMLElement = document.querySelector('#main-nav');
-        this.componetService.loadComponentAndAttach(COMPONENT_TYPES.HeaderComponent, headerElement)
-            .then((header) => {
-                header.init();
+        const footerElement: HTMLElement = document.querySelector('footer.site-footer');
+        const headerPromise =
+            this.componetService.loadComponentAndAttach(COMPONENT_TYPES.HeaderComponent, headerElement);
+        const footerPromise =
+            this.componetService.loadComponentAndAttach(COMPONENT_TYPES.FooterComponent, footerElement);
+
+        Promise.all([headerPromise, footerPromise])
+            .then((resolves: IComponent[]) => {
+                for (const resolve in resolves) {
+                    if (resolves.hasOwnProperty(resolve)) {
+                        resolves[resolve].init();
+                    }
+                }
                 self.router.start();
             });
     }

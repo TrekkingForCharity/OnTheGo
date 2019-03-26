@@ -3,7 +3,7 @@ import { IComponent, INFRASTRUCTURE_TYPES } from '../constructs';
 import { IRouter } from '../infrastructure';
 
 @injectable()
-export class HeaderComponent implements IComponent {
+export class FooterComponent implements IComponent {
     public attachedTo: HTMLElement;
 
     constructor(

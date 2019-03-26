@@ -23,5 +23,6 @@ export const PAGE_TYPES = {
 };
 
 export const COMPONENT_TYPES = {
+    FooterComponent: Symbol('footer-component'),
     HeaderComponent: Symbol('header-component'),
 };
