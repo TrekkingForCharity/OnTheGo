@@ -60,6 +60,7 @@
     "inversify": "^5.0.1",
     "oidc-client": "^1.6.1",
     "prouter": "^9.0.1",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "validate.js": "^0.12.0"
   }
 }
