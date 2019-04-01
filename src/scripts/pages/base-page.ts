@@ -32,6 +32,10 @@ export abstract class BasePage {
         return Promise.resolve();
     }
 
+    protected postRender(): Promise<void> {
+        return Promise.resolve();
+    }
+
     protected processLinks(): Promise<void> {
         const self = this;
         const $navigationLinks = this.pageContent.querySelectorAll<HTMLAnchorElement>('a[data-navigation]');
@@ -57,7 +61,7 @@ export abstract class BasePage {
                 classList.add(bodyClass);
             }
         }
-        return Promise.resolve();
+        return this.postRender();
     }
 
     private linkClick(ev: MouseEvent): void {
