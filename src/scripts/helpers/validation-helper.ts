@@ -37,7 +37,7 @@ export class ValidationHelper implements IValidationHelper {
     }
 
     public validate(): Promise<void> {
-        if (this.form.dataset.noValidate !== undefined) {
+        if (this.form.dataset !== undefined && this.form.dataset.noValidate !== undefined) {
             this.validationStatusValue = ValidationStatus.validationPassed;
             return Promise.resolve();
         } else {
@@ -52,6 +52,15 @@ export class ValidationHelper implements IValidationHelper {
                 this.decorateElement(element, attributes);
             }
             return Promise.resolve();
+        }).catch((errors: any) => {
+            if (errors instanceof Error) {
+                return Promise.reject(errors);
+            } else {
+                for (const element of this.elements) {
+                    this.decorateElement(element, errors);
+                }
+                return Promise.resolve();
+            }
         });
     }
 

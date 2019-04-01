@@ -170,7 +170,7 @@ describe('Validation Helper', () => {
             const validator: TypeMoq.IMock<Validate> =
             TypeMoq.Mock.ofType<Validate>();
             validator.setup((x: any) => x.then).returns(() => undefined);
-            validator.setup((x) => x.async(TypeMoq.It.isAny(), TypeMoq.It.isAny())).returns(() => Promise.resolve({
+            validator.setup((x) => x.async(TypeMoq.It.isAny(), TypeMoq.It.isAny())).returns(() => Promise.reject({
                 name: ['error message'],
             }));
             const form = document.createElement('form');
@@ -196,6 +196,37 @@ describe('Validation Helper', () => {
             await validationHelper.validate();
             expect(ValidationStatus.validationFailed).to.be.equal(validationHelper.validationStatus);
         });
+        it('ensure reject it cascaded if validator fails', async () => {
+            const validator: TypeMoq.IMock<Validate> =
+            TypeMoq.Mock.ofType<Validate>();
+            validator.setup((x: any) => x.then).returns(() => undefined);
+            validator.setup((x) => x.async(TypeMoq.It.isAny(), TypeMoq.It.isAny()))
+                .returns(() => Promise.reject(new Error('some error')));
+            const form = document.createElement('form');
+
+            const nameContainer = document.createElement('div');
+            nameContainer.classList.add('field');
+            const nameHelpBlock = document.createElement('span');
+            nameHelpBlock.dataset.valmsgFor = 'name';
+            const nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.name = 'name';
+            nameContainer.appendChild(nameInput);
+            nameContainer.appendChild(nameHelpBlock);
+
+            form.appendChild(nameContainer);
+
+            const validationHelper: ValidationHelper = new ValidationHelper(validator.object, form, {
+                name: {
+                    presence: true,
+                },
+            });
+
+            await validationHelper.validate().catch((error: Error) => {
+                expect('some error').to.be.equal(error.message);
+            });
+        });
+
 
     });
 });
