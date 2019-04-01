@@ -30,6 +30,7 @@ steps:
      sonar.sources=src
      sonar.tests=src
      sonar.test.inclusions=src/**/*.spec.ts
+     sonar.coverage.exclusions=src/scripts/infrastructure/app-start.ts
      sonar.exclusions=src/**/*.spec.ts
      sonar.typescript.lcov.reportPaths=coverage/lcov.info
 

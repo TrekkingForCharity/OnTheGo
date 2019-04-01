@@ -27,7 +27,7 @@ export class App {
         @inject(SERVICE_TYPES.ComponentService) private componetService: IComponentService) {
     }
 
-    public start() {
+    public start(): Promise<void> {
         const self = this;
         const headerElement: HTMLElement = document.querySelector('#main-nav');
         const footerElement: HTMLElement = document.querySelector('footer.site-footer');
@@ -36,14 +36,19 @@ export class App {
         const footerPromise =
             this.componetService.loadComponentAndAttach(COMPONENT_TYPES.FooterComponent, footerElement);
 
-        Promise.all([headerPromise, footerPromise])
+        return Promise.all([headerPromise, footerPromise])
             .then((resolves: IComponent[]) => {
+                const innerPromises = [];
                 for (const resolve in resolves) {
                     if (resolves.hasOwnProperty(resolve)) {
-                        resolves[resolve].init();
+                        innerPromises.push(resolves[resolve].init());
                     }
                 }
-                self.router.start();
+                return Promise.all(innerPromises)
+                    .then(() => {
+                        self.router.start();
+                        return Promise.resolve();
+                    });
             });
     }
 
