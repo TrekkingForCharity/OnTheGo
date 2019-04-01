@@ -4,7 +4,7 @@ import { UserManager, UserManagerSettings } from 'oidc-client';
 import { browserRouter, ProuterBrowserRouter } from 'prouter';
 import * as validate from 'validate.js';
 import { App } from '../app';
-import { HeaderComponent } from '../components';
+import { FooterComponent, HeaderComponent } from '../components';
 import { COMPONENT_TYPES, INFRASTRUCTURE_TYPES, PAGE_TYPES, SERVICE_TYPES } from '../constructs';
 import { ErrorPage, SignedInPage, SplashPage } from '../pages';
 import { AuthenticationService, ComponentService, HelperService,
@@ -33,6 +33,7 @@ export class AppStart {
 
     private static setupComponents(container: Container): void {
         container.bind<HeaderComponent>(COMPONENT_TYPES.HeaderComponent).to(HeaderComponent);
+        container.bind<FooterComponent>(COMPONENT_TYPES.FooterComponent).to(FooterComponent);
     }
 
     private static setupRoutes(container: Container): void {
