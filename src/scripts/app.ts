@@ -27,13 +27,15 @@ export class App {
         @inject(SERVICE_TYPES.ComponentService) private componetService: IComponentService) {
     }
 
-    public start() {
+    public start(): Promise<void> {
         const self = this;
         const headerElement: HTMLElement = document.querySelector('#main-nav');
-        this.componetService.loadComponentAndAttach(COMPONENT_TYPES.HeaderComponent, headerElement)
+        return this.componetService.loadComponentAndAttach(COMPONENT_TYPES.HeaderComponent, headerElement)
             .then((header) => {
-                header.init();
-                self.router.start();
+                return header.init().then(() => {
+                    self.router.start();
+                    return Promise.resolve();
+                });
             });
     }
 
