@@ -33,8 +33,8 @@ export class PageContentService implements IPageContentService {
 
     private generateAndStoreElement(content: string, viewName: string): Promise<HTMLElement> {
         const parser = new DOMParser();
-        const doc = parser.parseFromString(content, 'text/xml');
-        const element = doc.firstChild;
+        const doc = parser.parseFromString(content, 'text/html');
+        const element = doc.body.firstChild;
         this.pageContentItem[viewName] = element.cloneNode(true) as HTMLElement;
         return Promise.resolve(element as HTMLElement);
     }
