@@ -19,6 +19,7 @@ export const SERVICE_TYPES = {
 };
 
 export const PAGE_TYPES = {
+    ContactPage: 'contact-page',
     ErrorPage: 'error-page',
     HomePage: 'home-page',
     SignedInPage: 'signed-in-page',
@@ -26,6 +27,7 @@ export const PAGE_TYPES = {
 };
 
 export const COMPONENT_TYPES = {
+    FooterComponent: Symbol('footer-component'),
     HeaderComponent: Symbol('header-component'),
     TrekItemComponent: Symbol('trek-item-component'),
 };

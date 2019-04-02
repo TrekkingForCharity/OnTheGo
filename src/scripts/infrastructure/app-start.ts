@@ -5,9 +5,9 @@ import { UserManager, UserManagerSettings } from 'oidc-client';
 import { browserRouter, ProuterBrowserRouter } from 'prouter';
 import * as validate from 'validate.js';
 import { App } from '../app';
-import { HeaderComponent, TrekItemComponent } from '../components';
+import { FooterComponent, HeaderComponent, TrekItemComponent } from '../components';
 import { COMPONENT_TYPES, INFRASTRUCTURE_TYPES, PAGE_TYPES, SERVICE_TYPES } from '../constructs';
-import { ErrorPage, HomePage, SignedInPage, SplashPage } from '../pages';
+import { ContactPage, ErrorPage, HomePage, SignedInPage, SplashPage } from '../pages';
 import { AuthenticationService, ComponentService, HelperService,
     IAuthenticationService, IComponentService, IHelperService, IPageContentService,
     IPageProcessingService, ITemplateService, PageContentService, PageProcessingService,
@@ -32,11 +32,13 @@ export class AppStart {
         container.bind<SplashPage>(PAGE_TYPES.SplashPage).to(SplashPage);
         container.bind<SignedInPage>(PAGE_TYPES.SignedInPage).to(SignedInPage);
         container.bind<HomePage>(PAGE_TYPES.HomePage).to(HomePage);
+        container.bind<ContactPage>(PAGE_TYPES.ContactPage).to(ContactPage);
     }
 
     private static setupComponents(container: Container): void {
         container.bind<HeaderComponent>(COMPONENT_TYPES.HeaderComponent).to(HeaderComponent);
         container.bind<TrekItemComponent>(COMPONENT_TYPES.TrekItemComponent).to(TrekItemComponent);
+        container.bind<FooterComponent>(COMPONENT_TYPES.FooterComponent).to(FooterComponent);
     }
 
     private static setupRoutes(container: Container): void {
@@ -44,6 +46,7 @@ export class AppStart {
         router.registerRoute(PAGE_TYPES.SplashPage, '/');
         router.registerRoute(PAGE_TYPES.SignedInPage, '/signed-in');
         router.registerRoute(PAGE_TYPES.HomePage, '/home');
+        router.registerRoute(PAGE_TYPES.ContactPage, '/contact');
 
         router.registerRoute(PAGE_TYPES.ErrorPage, '*');
     }

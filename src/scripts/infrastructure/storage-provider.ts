@@ -1,6 +1,7 @@
 import { injectable } from 'inversify';
 
 export interface IStorageProvider {
+    readonly length: number;
     setItem(key: string, value: string);
     clear();
     getItem(key: string): string;
@@ -24,5 +25,8 @@ export class SessionStorageProvider implements IStorageProvider {
     }
     public removeItem(key: string) {
         sessionStorage.removeItem(key);
+    }
+    public get length(): number {
+        return sessionStorage.length;
     }
 }
