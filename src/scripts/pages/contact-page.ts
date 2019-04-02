@@ -30,10 +30,15 @@ export class ContactPage extends BasePage implements IPage {
     }
 
     protected loadAndProcessPageData(req: IRouterRequest): Promise<void> {
+        this.form = this.pageContent.querySelector<HTMLFormElement>('#contact-form');
+        return Promise.resolve();
+    }
+
+    protected postRender(): Promise<void> {
         const self = this;
-        this.form = document.querySelector<HTMLFormElement>('#contact-form');
         this.validationHelper = this.helperService.generateValidationHelper(this.form, {
             email: {
+                email: true,
                 presence: true,
             },
             message: {
@@ -43,20 +48,22 @@ export class ContactPage extends BasePage implements IPage {
                 presence: true,
             },
         });
-        this.form.addEventListener('submit', (event: Event) => { self.formSubmit(event); })
+        this.form.addEventListener('submit', (event: Event) => { self.formSubmit(event); });
 
         return Promise.resolve();
     }
 
-    private formSubmit(event: Event): void {
+    private formSubmit(event: Event): Promise<void> {
         const submitButton = this.form.querySelector('button[type=submit]');
         submitButton.setAttribute('disabled', 'disabled');
         event.preventDefault();
-        this.validationHelper.validate().then(() => {
+        return this.validationHelper.validate().then(() => {
             // Submit form with API client
             submitButton.removeAttribute('disabled');
-        }).catch(() => {
+            return Promise.resolve();
+        }).catch((err: any) => {
             submitButton.removeAttribute('disabled');
+            return Promise.resolve();
         });
     }
 }
