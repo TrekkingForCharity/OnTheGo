@@ -1,6 +1,6 @@
 export class PullOut {
+    public contentContainer: HTMLDivElement;
     private background: HTMLDivElement;
-    private contentContainer: HTMLDivElement;
     private closeResolve;
     private openResolve;
 

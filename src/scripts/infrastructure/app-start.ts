@@ -14,16 +14,18 @@ import { AuthenticationService, ComponentService, HelperService,
     TemplateService } from '../services';
 import { IRouter, IStorageProvider, Router, Validate } from './';
 import { SessionStorageProvider } from './storage-provider';
-
+import { ValidationExtentions } from '../extentions';
 export class AppStart {
     public static setup(): Promise<App> {
         const container = this.setupContainer();
-
+        
         container.bind<App>('app').to(App);
 
         this.setupPages(container);
         this.setupComponents(container);
         this.setupRoutes(container);
+
+        
         return Promise.resolve(container.get<App>('app'));
     }
 
