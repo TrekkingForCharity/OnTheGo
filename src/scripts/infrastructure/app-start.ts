@@ -10,18 +10,21 @@ import { ContactPage, ErrorPage, SignedInPage, SplashPage } from '../pages';
 import { AuthenticationService, ComponentService, HelperService,
     IAuthenticationService, IComponentService, IHelperService, IPageContentService,
     IPageProcessingService, PageContentService, PageProcessingService } from '../services';
-import { IConfig, IRouter, IStorageProvider, Router, Validate } from './';
+import { ConfigProvider, IConfig, IRouter, IStorageProvider, Router, Validate } from './';
 import { SessionStorageProvider } from './storage-provider';
 
 export class AppStart {
-    public static setup(config: IConfig): Promise<App> {
-        const container = this.setupContainer(config);
-        container.bind<IConfig>(INFRASTRUCTURE_TYPES.Config).toConstantValue(config);
-        container.bind<App>('app').to(App);
-        this.setupPages(container);
-        this.setupComponents(container);
-        this.setupRoutes(container);
-        return Promise.resolve(container.get<App>('app'));
+    public static setup(): Promise<App> {
+        const configProvider = new ConfigProvider();
+        return configProvider.loadConfig().then((config) => {
+            const container = this.setupContainer(config);
+            container.bind<IConfig>(INFRASTRUCTURE_TYPES.Config).toConstantValue(config);
+            container.bind<App>('app').to(App);
+            this.setupPages(container);
+            this.setupComponents(container);
+            this.setupRoutes(container);
+            return Promise.resolve(container.get<App>('app'));
+        });
     }
 
     private static setupPages(container: Container): void {

@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import 'reflect-metadata';
 import { COMPONENT_TYPES, IComponent, INFRASTRUCTURE_TYPES, SERVICE_TYPES } from './constructs';
-import { ConfigProvider, IRouter } from './infrastructure';
+import { IRouter } from './infrastructure';
 import { AppStart } from './infrastructure/app-start';
 import { IComponentService } from './services/component-service';
 
@@ -9,19 +9,13 @@ import { IComponentService } from './services/component-service';
 export class App {
     public static create(): Promise<App> {
         if (document.readyState !== 'loading') {
-            const configProvider = new ConfigProvider();
-            return configProvider.loadConfig().then((config) => {
-                return AppStart.setup(config);
-            });
+            return AppStart.setup();
         }
 
         return new Promise((resolve, reject) => {
             function handleUpload(event) {
                 document.removeEventListener('change', handleUpload);
-                const configProvider = new ConfigProvider();
-                return configProvider.loadConfig().then((config) => {
-                    resolve(AppStart.setup(config));
-                });
+                resolve(AppStart.setup());
             }
             document.addEventListener('DOMContentLoaded', handleUpload);
         });
