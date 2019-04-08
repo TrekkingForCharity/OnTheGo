@@ -1,4 +1,5 @@
 export const INFRASTRUCTURE_TYPES = {
+    Config: Symbol('config'),
     Container: Symbol('container'),
     EventBus: Symbol('event-bus'),
     ProuterBrowserRouter: Symbol('prouter-browser-router'),

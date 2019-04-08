@@ -10,15 +10,14 @@ import { ContactPage, ErrorPage, SignedInPage, SplashPage } from '../pages';
 import { AuthenticationService, ComponentService, HelperService,
     IAuthenticationService, IComponentService, IHelperService, IPageContentService,
     IPageProcessingService, PageContentService, PageProcessingService } from '../services';
-import { IRouter, IStorageProvider, Router, Validate } from './';
+import { IConfig, IRouter, IStorageProvider, Router, Validate } from './';
 import { SessionStorageProvider } from './storage-provider';
 
 export class AppStart {
-    public static setup(): Promise<App> {
-        const container = this.setupContainer();
-
+    public static setup(config: IConfig): Promise<App> {
+        const container = this.setupContainer(config);
+        container.bind<IConfig>(INFRASTRUCTURE_TYPES.Config).toConstantValue(config);
         container.bind<App>('app').to(App);
-
         this.setupPages(container);
         this.setupComponents(container);
         this.setupRoutes(container);
@@ -46,7 +45,7 @@ export class AppStart {
         router.registerRoute(PAGE_TYPES.ErrorPage, '*');
     }
 
-    private static setupContainer(): Container {
+    private static setupContainer(config: IConfig): Container {
         const container = new Container();
 
         container.bind<IPageProcessingService>(SERVICE_TYPES.PageProcessingService).to(PageProcessingService);
@@ -64,13 +63,13 @@ export class AppStart {
         container.bind<IStorageProvider>(INFRASTRUCTURE_TYPES.SessionStorageProvider).to(SessionStorageProvider);
 
         const userManagerSettings: UserManagerSettings = {
-            authority: 'https://trekkingforcharity.eu.auth0.com/',
-            automaticSilentRenew: true,
-            client_id: 'EXQEYsS2Joah48AFyb6KbnmME2h9lXoc',
-            loadUserInfo: true,
-            redirect_uri: 'http://localhost:1234/signed-in',
-            response_type: 'id_token token',
-            silent_redirect_uri: 'http://localhost:1234/silent-renew',
+            authority: config.auth.authority,
+            automaticSilentRenew: config.auth.automaticSilentRenew,
+            client_id: config.auth.clientId,
+            loadUserInfo: config.auth.loadUserInfo,
+            redirect_uri: config.auth.redirectUri,
+            response_type: config.auth.responseType,
+            silent_redirect_uri: config.auth.silentRedirectUri,
         };
         const userManager = new UserManager(userManagerSettings);
         container.bind<UserManager>(INFRASTRUCTURE_TYPES.UserManager)
