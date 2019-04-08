@@ -1,4 +1,13 @@
 mode: ContinuousDeployment
-branches: {}
+branches:
+  feature:
+    mode: ContinuousDeployment
+    tag: feature-{BranchName}
+  develop:
+    mode: ContinuousDeployment
+    tag: beta
+  master:
+    mode: ContinuousDeployment
+    tag: ''
 ignore:
   sha: []
