@@ -7,11 +7,10 @@ pool:
   vmImage: 'vs2017-win2016'
 
 steps:
-- task: cake-build.cake.cake-build-task.Cake@0
-  displayName: 'Version with Cake'
+- task: gittools.gitversion.gitversion-task.GitVersion@4
+  displayName: GitVersion
   inputs:
-    target: '__Versioning'
-    verbosity: Normal
+    preferBundledVersion: false
 
 - task: NodeTool@0
   inputs:
@@ -34,12 +33,20 @@ steps:
      sonar.coverage.exclusions=src/scripts/infrastructure/app-start.ts
      sonar.exclusions=src/**/*.spec.ts
      sonar.typescript.lcov.reportPaths=coverage/lcov.info
+- script: npm install    
+  displayName: 'install'
 
-- task: cake-build.cake.cake-build-task.Cake@0
-  displayName: 'Build with Cake'
-  inputs:
-    target: 'Default'
-    verbosity: Normal
+- script: npm run font:install
+  displayName: 'install font'
+
+- script: npm run build:partial
+  displayName: 'build for partials release'
+
+- script: npm run build:main
+  displayName: 'build for main release'
+
+- script: npm run test:coverage
+  displayName: 'tests'
   
 - task: PublishTestResults@2
   displayName: 'Publish Test Results coverage/xunit-report.xml'
