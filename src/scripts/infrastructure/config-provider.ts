@@ -1,4 +1,7 @@
 export interface IConfig {
+    api: {
+        url: string;
+    };
     auth: {
         authority: string;
         automaticSilentRenew: boolean;
@@ -12,6 +15,9 @@ export interface IConfig {
 
 export class ConfigProvider {
     private default: IConfig = {
+        api: {
+            url: 'UNKNOWN_DEFAULT',
+        },
         auth: {
             authority: 'UNKNOWN_DEFAULT',
             automaticSilentRenew: false,

@@ -77,7 +77,7 @@ describe('Page Processing Service', () => {
 
             container.setup((c) => c.get(TypeMoq.It.isValue('new-page'))).returns(() => page.object);
             container.setup((c) => c.get(TypeMoq.It.isValue('error-page'))).returns(() => errorPage.object);
-            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.reject());
+            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve(false));
 
             const service = new PageProcessingService(container.object, authService.object);
 
@@ -107,7 +107,7 @@ describe('Page Processing Service', () => {
 
             container.setup((c) => c.get(TypeMoq.It.isValue('new-page'))).returns(() => page.object);
             container.setup((c) => c.get(TypeMoq.It.isValue('error-page'))).returns(() => errorPage.object);
-            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.reject());
+            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve(false));
 
             const service = new PageProcessingService(container.object, authService.object);
 
@@ -133,7 +133,7 @@ describe('Page Processing Service', () => {
 
             container.setup((c) => c.get(TypeMoq.It.isValue('new-page'))).returns(() => page.object);
             container.setup((c) => c.get(TypeMoq.It.isValue('current-page'))).returns(() => currentPage.object);
-            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.reject());
+            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve(false));
 
             const service = new PageProcessingService(container.object, authService.object);
 
@@ -164,7 +164,7 @@ describe('Page Processing Service', () => {
 
             container.setup((c) => c.get(TypeMoq.It.isValue('new-page'))).returns(() => page.object);
             container.setup((c) => c.get(TypeMoq.It.isValue('error-page'))).returns(() => errorPage.object);
-            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve());
+            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve(true));
 
             const service = new PageProcessingService(container.object, authService.object);
 
@@ -190,7 +190,7 @@ describe('Page Processing Service', () => {
 
             container.setup((c) => c.get(TypeMoq.It.isValue('new-page'))).returns(() => page.object);
             container.setup((c) => c.get(TypeMoq.It.isValue('current-page'))).returns(() => currentPage.object);
-            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve());
+            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve(true));
 
             const service = new PageProcessingService(container.object, authService.object);
 
@@ -221,7 +221,7 @@ describe('Page Processing Service', () => {
 
             container.setup((c) => c.get(TypeMoq.It.isValue('new-page'))).returns(() => page.object);
             container.setup((c) => c.get(TypeMoq.It.isValue('error-page'))).returns(() => errorPage.object);
-            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve());
+            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve(true));
 
             const service = new PageProcessingService(container.object, authService.object);
 
@@ -247,7 +247,7 @@ describe('Page Processing Service', () => {
 
             container.setup((c) => c.get(TypeMoq.It.isValue('new-page'))).returns(() => page.object);
             container.setup((c) => c.get(TypeMoq.It.isValue('current-page'))).returns(() => currentPage.object);
-            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.reject());
+            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve(false));
 
             const service = new PageProcessingService(container.object, authService.object);
 
@@ -271,7 +271,7 @@ describe('Page Processing Service', () => {
             page.setup((p) => p.init(TypeMoq.It.isAny())).returns(() => Promise.resolve());
 
             container.setup((c) => c.get(TypeMoq.It.isValue('new-page'))).returns(() => page.object);
-            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve());
+            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve(true));
 
             const service = new PageProcessingService(container.object, authService.object);
 
@@ -299,7 +299,7 @@ describe('Page Processing Service', () => {
 
             container.setup((c) => c.get(TypeMoq.It.isValue('new-page'))).returns(() => page.object);
             container.setup((c) => c.get(TypeMoq.It.isValue('current-page'))).returns(() => currentPage.object);
-            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve());
+            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve(true));
 
             const service = new PageProcessingService(container.object, authService.object);
 
@@ -320,7 +320,7 @@ describe('Page Processing Service', () => {
             page.setup((p) => p.init(TypeMoq.It.isAny())).returns(() => Promise.resolve());
 
             container.setup((c) => c.get(TypeMoq.It.isValue('new-page'))).returns(() => page.object);
-            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve());
+            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve(true));
 
             const service = new PageProcessingService(container.object, authService.object);
 
@@ -348,7 +348,7 @@ describe('Page Processing Service', () => {
 
             container.setup((c) => c.get(TypeMoq.It.isValue('new-page'))).returns(() => page.object);
             container.setup((c) => c.get(TypeMoq.It.isValue('current-page'))).returns(() => currentPage.object);
-            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve());
+            authService.setup((a) => a.isAuthenticated()).returns(() => Promise.resolve(true));
 
             const service = new PageProcessingService(container.object, authService.object);
 

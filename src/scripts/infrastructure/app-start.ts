@@ -9,7 +9,7 @@ import { COMPONENT_TYPES, INFRASTRUCTURE_TYPES, PAGE_TYPES, SERVICE_TYPES } from
 import { ContactPage, ErrorPage, SignedInPage, SplashPage } from '../pages';
 import { AuthenticationService, ComponentService, HelperService,
     IAuthenticationService, IComponentService, IHelperService, IPageContentService,
-    IPageProcessingService, PageContentService, PageProcessingService } from '../services';
+    IPageProcessingService, PageContentService, PageProcessingService, IApiService, ApiService } from '../services';
 import { ConfigProvider, IConfig, IRouter, IStorageProvider, Router, Validate } from './';
 import { SessionStorageProvider } from './storage-provider';
 
@@ -58,6 +58,7 @@ export class AppStart {
         container.bind<IHelperService>(SERVICE_TYPES.HelperService).to(HelperService);
         container.bind<IRouter>(INFRASTRUCTURE_TYPES.Router).to(Router);
         container.bind<Validate>(INFRASTRUCTURE_TYPES.Validator).toConstantValue(validate);
+        container.bind<IApiService>(SERVICE_TYPES.ApiService).to(ApiService);
 
         const prouterBrowserRouter = browserRouter();
         container.bind<ProuterBrowserRouter>(INFRASTRUCTURE_TYPES.ProuterBrowserRouter)

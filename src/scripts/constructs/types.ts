@@ -10,6 +10,7 @@ export const INFRASTRUCTURE_TYPES = {
 };
 
 export const SERVICE_TYPES = {
+    ApiService: Symbol('api-service'),
     AuthenticationService: Symbol('authentication-service'),
     ComponentService: Symbol('component-service'),
     HelperService: Symbol('helper-service'),

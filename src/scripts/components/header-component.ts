@@ -22,7 +22,7 @@ export class HeaderComponent implements IComponent {
         this.processAuthenticationStatus();
     }
 
-    public init(params?: any|null): Promise<void> {
+    public async init(params?: any|null): Promise<void> {
         const self = this;
 
         this.$signUp = this.attachedTo.querySelector('#nav-sign-up');
@@ -53,20 +53,22 @@ export class HeaderComponent implements IComponent {
             }
         }
 
-        return this.processAuthenticationStatus();
+        return await this.processAuthenticationStatus();
     }
 
-    private processAuthenticationStatus() {
+    private async processAuthenticationStatus(): Promise<void> {
         const self = this;
-        return this.authenticationService.isAuthenticated().then(() => {
+        const isAuthenticated = await this.authenticationService.isAuthenticated();
+        if (isAuthenticated) {
             self.$signOut.classList.remove('is-hidden');
             self.$signUp.classList.add('is-hidden');
             self.$signIn.classList.add('is-hidden');
-        }).catch(() => {
+        } else {
             self.$signUp.classList.remove('is-hidden');
             self.$signIn.classList.remove('is-hidden');
             self.$signOut.classList.add('is-hidden');
-        });
+        }
+        return Promise.resolve();
     }
 
     private navbarBurgerClick(ev: MouseEvent) {
