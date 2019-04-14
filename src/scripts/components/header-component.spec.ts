@@ -130,11 +130,7 @@ describe('Header Component', () => {
     });
     it('when burger is clicked target is toggled', async () => {
         const headerItem = Helpers.setupComponentDom();
-        let called: boolean = false;
         const router: TypeMoq.IMock<IRouter> = TypeMoq.Mock.ofType<IRouter>();
-        router.setup((x) => x.attemptToNavigate(TypeMoq.It.isAny())).callback(() => {
-            called = true;
-        });
         const authenticationService: TypeMoq.IMock<IAuthenticationService> =
             TypeMoq.Mock.ofType<IAuthenticationService>();
         authenticationService.setup((x) => x.isAuthenticated()).returns(() => Promise.resolve(false));

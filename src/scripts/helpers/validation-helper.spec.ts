@@ -226,7 +226,5 @@ describe('Validation Helper', () => {
                 expect('some error').to.be.equal(error.message);
             });
         });
-
-
     });
 });
