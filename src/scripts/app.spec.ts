@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import * as fetchMock from 'fetch-mock';
 import 'reflect-metadata';
 import * as TypeMoq from 'typemoq';
 import { App } from './app';

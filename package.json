@@ -4,7 +4,8 @@
   "description": "The primary site for the Trekking for Charity platform",
   "main": "index.js",
   "scripts": {
-    "build": "parcel build ./src/pages/layout.pug --out-file index.html",
+    "build:main": "parcel build ./src/pages/layout.pug --out-file index.html",
+    "build:partial": "parcel build ./src/pages/*.partial.pug",
     "dev:layout": "parcel ./src/pages/layout.pug --out-file index.html",
     "dev:partials": "parcel watch ./src/pages/*.partial.pug",
     "dev": "concurrently \"npm run dev:layout\" \"npm run dev:partials\"",
@@ -59,9 +60,14 @@
     "eventbus-ts": "^1.1.2",
     "handlebars": "^4.1.0",
     "inversify": "^5.0.1",
+    "mock-local-storage": "^1.1.8",
     "oidc-client": "^1.6.1",
+    "parcel-plugin-static-files-copy": "^2.0.0",
     "prouter": "^9.0.1",
     "reflect-metadata": "^0.1.13",
     "validate.js": "^0.12.0"
+  },
+  "staticFiles": {
+    "staticPath": "src/assets"
   }
 }

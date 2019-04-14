@@ -6,3 +6,5 @@ dist
 .vscode
 coverage
 .sonarlint
+src/assets/config.json
+tools/

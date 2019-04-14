@@ -1,6 +1,5 @@
 import { inject, injectable } from 'inversify';
 import 'reflect-metadata';
-import { HeaderComponent } from './components';
 import { COMPONENT_TYPES, IComponent, INFRASTRUCTURE_TYPES, SERVICE_TYPES } from './constructs';
 import { IRouter } from './infrastructure';
 import { AppStart } from './infrastructure/app-start';
