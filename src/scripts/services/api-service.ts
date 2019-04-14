@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { IAuthenticationService } from '.';
-import { IConfig } from '../infrastructure';
 import { INFRASTRUCTURE_TYPES, SERVICE_TYPES } from '../constructs';
+import { IConfig } from '../infrastructure';
 
 export enum CommandType  {
     QueryTreksForUser = 1,
