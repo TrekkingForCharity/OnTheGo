@@ -6,10 +6,11 @@ import { AuthEvent } from '../events';
 import { IStorageProvider } from '../infrastructure';
 
 export interface IAuthenticationService {
-    isAuthenticated(): Promise<void>;
+    isAuthenticated(): Promise<boolean>;
     handleSignInCallback(): Promise<string>;
     signIn(originalUrl?: string): Promise<any>;
     signOut(): Promise<void>;
+    getToken(): Promise<string>;
 }
 
 @injectable()
@@ -40,10 +41,21 @@ export class AuthenticationService implements IAuthenticationService {
         });
     }
 
-    public isAuthenticated(): Promise<void> {
+    public isAuthenticated(): Promise<boolean> {
         return this.userManager.getUser().then((user: User) => {
             if (user) {
-                return Promise.resolve();
+                return Promise.resolve(true);
+            }
+            return Promise.resolve(false);
+        }).catch((reason: any) => {
+            return Promise.resolve(false);
+        });
+    }
+
+    public getToken(): Promise<string> {
+        return this.userManager.getUser().then((user: User) => {
+            if (user) {
+                return Promise.resolve(user.access_token);
             }
             return Promise.reject();
         });

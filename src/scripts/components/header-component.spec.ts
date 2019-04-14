@@ -57,7 +57,7 @@ describe('Header Component', () => {
         authenticationService.setup((x) => x.signIn()).callback(() => {
             called = true;
         });
-        authenticationService.setup((x) => x.isAuthenticated()).returns(() => Promise.resolve());
+        authenticationService.setup((x) => x.isAuthenticated()).returns(() => Promise.resolve(true));
         authenticationService.setup((x: any) => x.then).returns(() => undefined);
         const component: HeaderComponent = new HeaderComponent(router.object, authenticationService.object);
         component.attachedTo = headerItem.attachTo;
@@ -75,7 +75,7 @@ describe('Header Component', () => {
         authenticationService.setup((x) => x.signOut()).callback(() => {
             called = true;
         });
-        authenticationService.setup((x) => x.isAuthenticated()).returns(() => Promise.resolve());
+        authenticationService.setup((x) => x.isAuthenticated()).returns(() => Promise.resolve(true));
         authenticationService.setup((x: any) => x.then).returns(() => undefined);
         const component: HeaderComponent = new HeaderComponent(router.object, authenticationService.object);
         component.attachedTo = headerItem.attachTo;
@@ -88,7 +88,7 @@ describe('Header Component', () => {
         const router: TypeMoq.IMock<IRouter> = TypeMoq.Mock.ofType<IRouter>();
         const authenticationService: TypeMoq.IMock<IAuthenticationService> =
             TypeMoq.Mock.ofType<IAuthenticationService>();
-        authenticationService.setup((x) => x.isAuthenticated()).returns(() => Promise.resolve());
+        authenticationService.setup((x) => x.isAuthenticated()).returns(() => Promise.resolve(true));
         authenticationService.setup((x: any) => x.then).returns(() => undefined);
         const component: HeaderComponent = new HeaderComponent(router.object, authenticationService.object);
         component.attachedTo = headerItem.attachTo;
@@ -102,7 +102,7 @@ describe('Header Component', () => {
         const router: TypeMoq.IMock<IRouter> = TypeMoq.Mock.ofType<IRouter>();
         const authenticationService: TypeMoq.IMock<IAuthenticationService> =
             TypeMoq.Mock.ofType<IAuthenticationService>();
-        authenticationService.setup((x) => x.isAuthenticated()).returns(() => Promise.reject());
+        authenticationService.setup((x) => x.isAuthenticated()).returns(() => Promise.resolve(false));
         authenticationService.setup((x: any) => x.then).returns(() => undefined);
         const component: HeaderComponent = new HeaderComponent(router.object, authenticationService.object);
         component.attachedTo = headerItem.attachTo;
@@ -120,7 +120,7 @@ describe('Header Component', () => {
         });
         const authenticationService: TypeMoq.IMock<IAuthenticationService> =
             TypeMoq.Mock.ofType<IAuthenticationService>();
-        authenticationService.setup((x) => x.isAuthenticated()).returns(() => Promise.reject());
+        authenticationService.setup((x) => x.isAuthenticated()).returns(() => Promise.resolve(false));
         authenticationService.setup((x: any) => x.then).returns(() => undefined);
         const component: HeaderComponent = new HeaderComponent(router.object, authenticationService.object);
         component.attachedTo = headerItem.attachTo;
@@ -130,14 +130,10 @@ describe('Header Component', () => {
     });
     it('when burger is clicked target is toggled', async () => {
         const headerItem = Helpers.setupComponentDom();
-        let called: boolean = false;
         const router: TypeMoq.IMock<IRouter> = TypeMoq.Mock.ofType<IRouter>();
-        router.setup((x) => x.attemptToNavigate(TypeMoq.It.isAny())).callback(() => {
-            called = true;
-        });
         const authenticationService: TypeMoq.IMock<IAuthenticationService> =
             TypeMoq.Mock.ofType<IAuthenticationService>();
-        authenticationService.setup((x) => x.isAuthenticated()).returns(() => Promise.reject());
+        authenticationService.setup((x) => x.isAuthenticated()).returns(() => Promise.resolve(false));
         authenticationService.setup((x: any) => x.then).returns(() => undefined);
         const component: HeaderComponent = new HeaderComponent(router.object, authenticationService.object);
         component.attachedTo = headerItem.attachTo;

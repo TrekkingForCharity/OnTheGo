@@ -7,6 +7,9 @@ describe('Config Provider', () => {
     afterEach(fetchMock.restore);
     it('when loading config expect valid config', async () => {
         const config: IConfig = {
+            api: {
+                url: 'url',
+            },
             auth: {
                 authority: 'authority',
                 automaticSilentRenew: true,

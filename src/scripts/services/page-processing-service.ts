@@ -79,12 +79,14 @@ export class PageProcessingService implements IPageProcessingService {
             return Promise.resolve(pageData);
         }
         if (pageData.page.requiresAuthentication) {
-            return this.authenticationService.isAuthenticated().then(() => {
-                return Promise.resolve(pageData);
-            }).catch(() => {
-                return this.processError({
-                    navigationRejectionReason: NavigationRejectionReason.notAuthenticated,
-                });
+            return this.authenticationService.isAuthenticated().then((isAuthenticated: boolean) => {
+                if (isAuthenticated) {
+                    return Promise.resolve(pageData);
+                } else {
+                    return this.processError({
+                        navigationRejectionReason: NavigationRejectionReason.notAuthenticated,
+                    });
+                }
             });
         }
 
