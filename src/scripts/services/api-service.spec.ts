@@ -84,7 +84,7 @@ describe('Api service', () => {
                 TypeMoq.Mock.ofType<IAuthenticationService>();
 
             const apiService = new ApiService(config.object, authenticationService.object);
-            await apiService.execute(CommandType.QueryTreksForUser, {foo: 'bar'});
+            await apiService.executeWithParameters(CommandType.QueryTreksForUser, {foo: 'bar'});
             const bodyJson = fetchMock.lastCall()[1].body.toString();
             const body = JSON.parse(bodyJson);
             expect(body.query).to.not.equal(undefined);
