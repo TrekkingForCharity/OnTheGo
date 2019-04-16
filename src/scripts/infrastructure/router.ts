@@ -8,6 +8,7 @@ export interface IRouter {
     registerRoute(pageName: string, path: string): void;
     start(): void;
     externalRedirct(uri: string): void;
+    traverseBack(): void;
 }
 
 export interface IRouterRequest extends ProuterRequest {
@@ -37,6 +38,10 @@ export class Router implements IRouter {
     }
 
     public externalRedirct(uri: string): void {
-        window.location.hostname = uri;
+        window.location.href = uri;
+    }
+
+    public traverseBack(): void {
+        window.history.back();
     }
 }

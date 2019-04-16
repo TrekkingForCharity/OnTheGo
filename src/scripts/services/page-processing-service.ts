@@ -67,7 +67,7 @@ export class PageProcessingService implements IPageProcessingService {
             return Promise.resolve(pageData);
         }
         const page = this.container.get<IPage>(pageName);
-        if (!page) {
+        if (!page || pageName === 'error-page') {
             return this.processError({
                 navigationRejectionReason: NavigationRejectionReason.notFound,
             });
