@@ -9,7 +9,7 @@ export abstract class BasePage {
     protected abstract bodyClasses: string[];
     protected pageContent: HTMLElement;
 
-    constructor(private pageContentService: IPageContentService, private router: IRouter) {
+    constructor(private pageContentService: IPageContentService, protected router: IRouter) {
 
     }
 
