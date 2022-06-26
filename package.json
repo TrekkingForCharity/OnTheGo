@@ -60,7 +60,7 @@
     "eventbus-ts": "^1.1.2",
     "inversify": "^5.0.1",
     "mock-local-storage": "^1.1.8",
-    "oidc-client": "^1.6.1",
+    "oidc-client": "^1.7.0",
     "parcel-plugin-static-files-copy": "^2.0.0",
     "prouter": "^9.0.1",
     "reflect-metadata": "^0.1.13",
